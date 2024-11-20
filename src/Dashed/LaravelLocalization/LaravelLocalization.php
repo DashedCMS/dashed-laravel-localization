@@ -140,6 +140,7 @@ class LaravelLocalization
         $this->url = $url;
 
         // set default locale
+        dd($this->configRepository->get('app.locale'));
         $this->defaultLocale = $this->configRepository->get('app.locale');
         $supportedLocales = $this->getSupportedLocales();
 

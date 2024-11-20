@@ -18,6 +18,7 @@ class LocaleCookieRedirect extends LaravelLocalizationMiddlewareBase
      */
     public function handle($request, Closure $next)
     {
+        dd('asdf');
         // If the URL of the request is in exceptions.
         if ($this->shouldIgnore($request)) {
             return $next($request);

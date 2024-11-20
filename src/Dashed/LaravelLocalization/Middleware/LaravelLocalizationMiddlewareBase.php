@@ -20,6 +20,7 @@ class LaravelLocalizationMiddlewareBase
      */
     protected function shouldIgnore($request)
     {
+        dd('asdf');
         if (in_array($request->method(), config('laravellocalization.httpMethodsIgnored'))) {
             return true;
         }
