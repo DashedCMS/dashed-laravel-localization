@@ -581,6 +581,7 @@ class LaravelLocalization
         }
 
         // or get application default language
+        dd($this->configRepository->get('app.locale'));
         return $this->configRepository->get('app.locale');
     }
 
