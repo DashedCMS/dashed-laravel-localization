@@ -51,7 +51,7 @@ trait TranslatedRouteCommandContext
     {
         $path = $this->laravel->getCachedRoutesPath();
 
-        if ( ! $locale ) {
+        if (! $locale) {
             return $path;
         }
 

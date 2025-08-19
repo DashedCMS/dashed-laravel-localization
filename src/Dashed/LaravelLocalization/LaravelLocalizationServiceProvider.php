@@ -38,7 +38,8 @@ class LaravelLocalizationServiceProvider extends ServiceProvider
         $packageConfigFile = __DIR__.'/../../config/config.php';
 
         $this->mergeConfigFrom(
-            $packageConfigFile, 'laravellocalization'
+            $packageConfigFile,
+            'laravellocalization'
         );
 
         $this->registerBindings();

@@ -7,7 +7,7 @@ class ModelWithTranslatableRoutes extends Model implements LocalizedUrlRoutable
 {
     public function getLocalizedRouteKey($locale)
     {
-        if($locale == 'es'){
+        if ($locale == 'es') {
             return 'empresa';
         }
 

@@ -32,7 +32,7 @@ class LocaleSessionRedirect extends LaravelLocalizationMiddlewareBase
             return $next($request);
         }
 
-        if (empty($locale) && app('laravellocalization')->hideUrlAndAcceptHeader()){
+        if (empty($locale) && app('laravellocalization')->hideUrlAndAcceptHeader()) {
             // When default locale is hidden and accept language header is true,
             // then compute browser language when no session has been set.
             // Once the session has been set, there is no need
@@ -46,14 +46,14 @@ class LocaleSessionRedirect extends LaravelLocalizationMiddlewareBase
             session(['locale' => $locale]);
         }
 
-        if ($locale === false){
+        if ($locale === false) {
             $locale = app('laravellocalization')->getCurrentLocale();
         }
 
         if (
             $locale &&
             app('laravellocalization')->checkLocaleInSupportedLocales($locale) &&
-            !(app('laravellocalization')->isHiddenDefault($locale))
+            ! (app('laravellocalization')->isHiddenDefault($locale))
         ) {
             app('session')->reflash();
             $redirection = app('laravellocalization')->getLocalizedURL($locale);
