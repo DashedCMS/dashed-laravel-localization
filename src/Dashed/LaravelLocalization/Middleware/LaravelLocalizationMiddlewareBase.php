@@ -2,7 +2,6 @@
 
 namespace Dashed\LaravelLocalization\Middleware;
 
-
 class LaravelLocalizationMiddlewareBase
 {
     /**

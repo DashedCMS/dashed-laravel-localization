@@ -42,38 +42,38 @@ class LocalizerTests extends \Orchestra\Testbench\BrowserKit\TestCase
         }
 
         app('router')->group([
-            'prefix'     => app('laravellocalization')->setLocale(),
+            'prefix' => app('laravellocalization')->setLocale(),
             'middleware' => [
                 'Dashed\LaravelLocalization\Middleware\LaravelLocalizationRoutes',
                 'Dashed\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter',
             ],
         ], function () {
-            app('router')->get('/', ['as'=> 'index', function () {
+            app('router')->get('/', ['as' => 'index', function () {
                 return app('translator')->get('LaravelLocalization::routes.hello');
             }, ]);
 
-            app('router')->get('test', ['as'=> 'test', function () {
+            app('router')->get('test', ['as' => 'test', function () {
                 return app('translator')->get('LaravelLocalization::routes.test_text');
             }, ]);
 
-            app('router')->get(app('laravellocalization')->transRoute('LaravelLocalization::routes.about'), ['as'=> 'about', function () {
+            app('router')->get(app('laravellocalization')->transRoute('LaravelLocalization::routes.about'), ['as' => 'about', function () {
                 return app('laravellocalization')->getLocalizedURL('es') ?: 'Not url available';
             }, ]);
 
-            app('router')->get(app('laravellocalization')->transRoute('LaravelLocalization::routes.view'), ['as'=> 'view', function () {
+            app('router')->get(app('laravellocalization')->transRoute('LaravelLocalization::routes.view'), ['as' => 'view', function () {
                 return app('laravellocalization')->getLocalizedURL('es') ?: 'Not url available';
             }, ]);
 
-            app('router')->get(app('laravellocalization')->transRoute('LaravelLocalization::routes.view_project'), ['as'=> 'view_project', function () {
+            app('router')->get(app('laravellocalization')->transRoute('LaravelLocalization::routes.view_project'), ['as' => 'view_project', function () {
                 return app('laravellocalization')->getLocalizedURL('es') ?: 'Not url available';
             }, ]);
 
-            app('router')->get(app('laravellocalization')->transRoute('LaravelLocalization::routes.manage'), ['as'=> 'manage', function () {
+            app('router')->get(app('laravellocalization')->transRoute('LaravelLocalization::routes.manage'), ['as' => 'manage', function () {
                 return app('laravellocalization')->getLocalizedURL('es') ?: 'Not url available';
             }, ]);
         });
 
-        app('router')->get('/skipped', ['as'=> 'skipped', function () {
+        app('router')->get('/skipped', ['as' => 'skipped', function () {
             return Request::url();
         }, ]);
     }
@@ -108,9 +108,9 @@ class LocalizerTests extends \Orchestra\Testbench\BrowserKit\TestCase
         $files = [],
         $server = ['CONTENT_TYPE' => 'application/json'],
         $content = null
-    )
-    {
-        $request = new \Illuminate\Http\Request;
+    ) {
+        $request = new \Illuminate\Http\Request();
+
         return $request->createFromBase(
             \Symfony\Component\HttpFoundation\Request::create(
                 $uri,
@@ -386,7 +386,8 @@ class LocalizerTests extends \Orchestra\Testbench\BrowserKit\TestCase
         ];
     }
 
-    public function testGetLocalizedUrlForIgnoredUrls() {
+    public function testGetLocalizedUrlForIgnoredUrls()
+    {
         $crawler = $this->call(
             'GET',
             $this->test_url2.'/skipped',
@@ -785,22 +786,23 @@ class LocalizerTests extends \Orchestra\Testbench\BrowserKit\TestCase
         );
     }
 
-
     /**
      * @dataProvider accept_language_variations_data
      */
-    public function testLanguageNegotiation($accept_string, $must_resolve_to, $asd = null) {
+    public function testLanguageNegotiation($accept_string, $must_resolve_to, $asd = null)
+    {
 
         $full_config = include __DIR__ . '/full-config/config.php';
 
         $request = $this->createMock(\Illuminate\Http\Request::class);
         $request->expects($this->any())->method('header')->with('Accept-Language')->willReturn($accept_string);
 
-        $negotiator = app(\Dashed\LaravelLocalization\LanguageNegotiator::class,
+        $negotiator = app(
+            \Dashed\LaravelLocalization\LanguageNegotiator::class,
             [
                     'defaultLocale' => 'wrong',
                     'supportedLanguages' => $full_config['supportedLocales'],
-                    'request' => $request
+                    'request' => $request,
             ]
         );
 
@@ -810,8 +812,8 @@ class LocalizerTests extends \Orchestra\Testbench\BrowserKit\TestCase
         $this->assertEquals($must_resolve_to, $language);
     }
 
-
-    public function accept_language_variations_data() {
+    public function accept_language_variations_data()
+    {
         $variations = [
             ['en-GB', 'en-GB'],
             ['en-US', 'en-US'],
@@ -832,13 +834,14 @@ class LocalizerTests extends \Orchestra\Testbench\BrowserKit\TestCase
         return $dataset;
     }
 
-    public function testLanguageNegotiationWithMapping() {
+    public function testLanguageNegotiationWithMapping()
+    {
 
         $accept_string = 'en-GB';
         $must_resolve_to = 'uk';
 
         $mapping = [
-            $accept_string => $must_resolve_to
+            $accept_string => $must_resolve_to,
         ];
 
         $full_config = include __DIR__ . '/full-config/config.php';
@@ -851,11 +854,12 @@ class LocalizerTests extends \Orchestra\Testbench\BrowserKit\TestCase
         $request = $this->createMock(\Illuminate\Http\Request::class);
         $request->expects($this->any())->method('header')->with('Accept-Language')->willReturn($accept_string);
 
-        $negotiator = app(\Dashed\LaravelLocalization\LanguageNegotiator::class,
+        $negotiator = app(
+            \Dashed\LaravelLocalization\LanguageNegotiator::class,
             [
                 'defaultLocale' => 'wrong',
                 'supportedLanguages' => $full_config['supportedLocales'],
-                'request' => $request
+                'request' => $request,
             ]
         );
 

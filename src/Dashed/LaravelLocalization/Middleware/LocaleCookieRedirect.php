@@ -1,4 +1,6 @@
-<?php namespace Dashed\LaravelLocalization\Middleware;
+<?php
+
+namespace Dashed\LaravelLocalization\Middleware;
 
 use Closure;
 use Illuminate\Http\RedirectResponse;
@@ -7,7 +9,6 @@ use Dashed\LaravelLocalization\LanguageNegotiator;
 
 class LocaleCookieRedirect extends LaravelLocalizationMiddlewareBase
 {
-
     /**
      * Handle an incoming request.
      *
@@ -30,7 +31,7 @@ class LocaleCookieRedirect extends LaravelLocalizationMiddlewareBase
             return $next($request)->withCookie(cookie()->forever('locale', $params[0]));
         }
 
-        if (empty($locale) && app('laravellocalization')->hideUrlAndAcceptHeader()){
+        if (empty($locale) && app('laravellocalization')->hideUrlAndAcceptHeader()) {
             // When default locale is hidden and accept language header is true,
             // then compute browser language when no session has been set.
             // Once the session has been set, there is no need
@@ -44,14 +45,14 @@ class LocaleCookieRedirect extends LaravelLocalizationMiddlewareBase
             Cookie::queue(Cookie::forever('locale', $locale));
         }
 
-        if ($locale === false){
+        if ($locale === false) {
             $locale = app('laravellocalization')->getCurrentLocale();
         }
 
         if (
             $locale &&
             app('laravellocalization')->checkLocaleInSupportedLocales($locale) &&
-            !(app('laravellocalization')->isHiddenDefault($locale))
+            ! (app('laravellocalization')->isHiddenDefault($locale))
         ) {
             $redirection = app('laravellocalization')->getLocalizedURL($locale);
             $redirectResponse = new RedirectResponse($redirection, 302, ['Vary' => 'Accept-Language']);

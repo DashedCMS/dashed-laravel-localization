@@ -2,11 +2,11 @@
 
 namespace Dashed\LaravelLocalization\Commands;
 
-use Dashed\LaravelLocalization\LaravelLocalization;
-use Dashed\LaravelLocalization\Traits\TranslatedRouteCommandContext;
 use Illuminate\Contracts\Console\Kernel;
-use Illuminate\Foundation\Console\RouteListCommand;
 use Symfony\Component\Console\Input\InputArgument;
+use Dashed\LaravelLocalization\LaravelLocalization;
+use Illuminate\Foundation\Console\RouteListCommand;
+use Dashed\LaravelLocalization\Traits\TranslatedRouteCommandContext;
 
 class RouteTranslationsListCommand extends RouteListCommand
 {
@@ -22,7 +22,6 @@ class RouteTranslationsListCommand extends RouteListCommand
      */
     protected $description = 'List all registered routes for specific locales';
 
-
     /**
      * Execute the console command.
      */
@@ -30,8 +29,9 @@ class RouteTranslationsListCommand extends RouteListCommand
     {
         $locale = $this->argument('locale');
 
-        if ( ! $this->isSupportedLocale($locale)) {
+        if (! $this->isSupportedLocale($locale)) {
             $this->error("Unsupported locale: '{$locale}'.");
+
             return;
         }
 

@@ -2,10 +2,10 @@
 
 namespace Dashed\LaravelLocalization\Commands;
 
-use Illuminate\Foundation\Console\RouteCacheCommand;
-use Dashed\LaravelLocalization\LaravelLocalization;
-use Dashed\LaravelLocalization\Traits\TranslatedRouteCommandContext;
 use Illuminate\Routing\RouteCollection;
+use Dashed\LaravelLocalization\LaravelLocalization;
+use Illuminate\Foundation\Console\RouteCacheCommand;
+use Dashed\LaravelLocalization\Traits\TranslatedRouteCommandContext;
 
 class RouteTranslationsCacheCommand extends RouteCacheCommand
 {
@@ -20,7 +20,6 @@ class RouteTranslationsCacheCommand extends RouteCacheCommand
      * @var string
      */
     protected $description = 'Create a route cache file for faster route registration for all locales';
-
 
     /**
      * Execute the console command.
@@ -51,6 +50,7 @@ class RouteTranslationsCacheCommand extends RouteCacheCommand
 
             if (count($routes) == 0) {
                 $this->error("Your application doesn't have any routes.");
+
                 return;
             }
 
@@ -59,7 +59,8 @@ class RouteTranslationsCacheCommand extends RouteCacheCommand
             }
 
             $this->files->put(
-                $this->makeLocaleRoutesPath($locale), $this->buildRouteCacheFile($routes)
+                $this->makeLocaleRoutesPath($locale),
+                $this->buildRouteCacheFile($routes)
             );
         }
     }

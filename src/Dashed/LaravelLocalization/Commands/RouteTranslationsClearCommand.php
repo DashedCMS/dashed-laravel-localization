@@ -2,9 +2,9 @@
 
 namespace Dashed\LaravelLocalization\Commands;
 
-use Dashed\LaravelLocalization\Traits\TranslatedRouteCommandContext;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
+use Dashed\LaravelLocalization\Traits\TranslatedRouteCommandContext;
 
 class RouteTranslationsClearCommand extends Command
 {

@@ -15,7 +15,8 @@ class LaravelLocalizationViewPath extends LaravelLocalizationMiddlewareBase
      *
      * @return mixed
      */
-    public function handle($request, Closure $next) {
+    public function handle($request, Closure $next)
+    {
 
         // If the URL of the request is in exceptions.
         if ($this->shouldIgnore($request)) {
@@ -32,5 +33,4 @@ class LaravelLocalizationViewPath extends LaravelLocalizationMiddlewareBase
 
         return $next($request);
     }
-
 }

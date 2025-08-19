@@ -37,7 +37,7 @@ trait LoadsTranslatedCachedRoutes
 
         $path = $this->makeLocaleRoutesPath($locale, $localeKeys);
 
-        if ( ! file_exists($path)) {
+        if (! file_exists($path)) {
 
             Log::warning("Routes cached, but no cached routes found for locale '{$locale}'!");
 
@@ -60,7 +60,7 @@ trait LoadsTranslatedCachedRoutes
     {
         $path = $this->getDefaultCachedRoutePath();
 
-        if ( ! $locale || ! in_array($locale, $localeKeys)) {
+        if (! $locale || ! in_array($locale, $localeKeys)) {
             return $path;
         }
 
