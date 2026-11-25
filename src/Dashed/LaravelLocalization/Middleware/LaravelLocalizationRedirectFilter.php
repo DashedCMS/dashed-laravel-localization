@@ -37,7 +37,8 @@ class LaravelLocalizationRedirectFilter extends LaravelLocalizationMiddlewareBas
                     // Save any flashed data for redirect
                     app('session')->reflash();
 
-                    return new RedirectResponse($redirection, 302, ['Vary' => 'Accept-Language']);
+                    // Permanent: /nl/... is never the right address when the default locale is hidden.
+                    return new RedirectResponse($redirection, 301, ['Vary' => 'Accept-Language']);
                 }
             }
         }
